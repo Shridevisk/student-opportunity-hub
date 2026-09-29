@@ -1,13 +1,20 @@
 from flask import Flask, render_template, request
 import sqlite3
+import os
 from datetime import datetime, date
 
 app = Flask(__name__)
 
-DATABASE = "opportunities.db"
-
 
 # ---------------- DATABASE ----------------
+
+# Vercel does not allow normal project-directory writes.
+# /tmp is writable during a Vercel function execution.
+if os.environ.get("VERCEL"):
+    DATABASE = "/tmp/opportunities.db"
+else:
+    DATABASE = "opportunities.db"
+
 
 def get_db():
     db = sqlite3.connect(DATABASE)
@@ -243,7 +250,7 @@ def opportunities():
             value
         ])
 
-    # Category
+    # Category filter
     if category != "All":
 
         query += """
@@ -252,6 +259,7 @@ def opportunities():
 
         values.append(category)
 
+    # Sort by nearest deadline
     query += """
         ORDER BY deadline ASC
     """
