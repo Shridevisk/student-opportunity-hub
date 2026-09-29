@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Explore Opportunities
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="listing-page">
+
+
+    <div class="page-heading">
+
+        <span class="label">
+            EXPLORE
+        </span>
+
+
+        <h1>
+            Find your next opportunity.
+        </h1>
+
+
+        <p>
+            Search and filter opportunities
+            based on your interests.
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <form
+        method="GET"
+        action="{{ url_for('opportunities') }}"
+        class="search-form"
+    >
+
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search opportunities..."
+            value="{{ search }}"
+        >
+
+
+        <select name="category">
+
+            {% for item in categories %}
+
+            <option
+                value="{{ item }}"
+                {% if selected_category == item %}
+                    selected
+                {% endif %}
+            >
+
+                {{ item }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+
+        <button
+            type="submit"
+            class="search-button"
+        >
+            Search
+        </button>
+
+
+    </form>
+
+
+    <!-- CATEGORY FILTER -->
+
+    <div class="filter-buttons">
+
+        {% for item in categories %}
+
+        <a
+            href="{{ url_for(
+                'opportunities',
+                category=item
+            ) }}"
+            class="
+                {% if selected_category == item %}
+                    active
+                {% endif %}
+            "
+        >
+
+            {{ item }}
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <div class="results">
+
+        Showing
+        <strong>
+            {{ opportunities|length }}
+        </strong>
+        opportunities
+
+    </div>
+
+
+    {% if opportunities %}
+
+
+    <div class="opportunity-grid">
+
+
+        {% for item in opportunities %}
+
+
+        <div class="opportunity-card">
+
+
+            <span class="category-tag">
+
+                {{ item["category"] }}
+
+            </span>
+
+
+            <h3>
+
+                {{ item["title"] }}
+
+            </h3>
+
+
+            <p class="organization">
+
+                {{ item["organization"] }}
+
+            </p>
+
+
+            <p class="description">
+
+                {{ item["description"] }}
+
+            </p>
+
+
+            <div class="card-info">
+
+                <span>
+                    📅 {{ item["deadline"] }}
+                </span>
+
+                <span>
+                    📍 {{ item["mode"] }}
+                </span>
+
+            </div>
+
+
+            <!-- URGENT DEADLINE -->
+
+            <div class="urgent">
+
+                {% set deadline =
+                    item["deadline"] %}
+
+                {% set today =
+                    now().strftime("%Y-%m-%d")
+                    if false else ""
+                %}
+
+                ⏰ Upcoming deadline
+
+            </div>
+
+
+            <a
+                href="{{ url_for(
+                    'opportunity_details',
+                    id=item['id']
+                ) }}"
+                class="card-button"
+            >
+
+                View Opportunity →
+
+            </a>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <div class="no-results">
+
+        <h2>
+            No opportunities found
+        </h2>
+
+        <p>
+            Try a different search or category.
+        </p>
+
+    </div>
+
+
+    {% endif %}
+
+
+</section>
+
+
+{% endblock %}

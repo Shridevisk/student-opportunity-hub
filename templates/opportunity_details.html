@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+{% if opportunity %}
+
+    {{ opportunity["title"] }}
+
+{% else %}
+
+    Opportunity Not Found
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if opportunity %}
+
+
+<section class="details-page">
+
+
+    <a
+        href="{{ url_for('opportunities') }}"
+        class="back"
+    >
+        ← Back to Opportunities
+    </a>
+
+
+    <div class="details-container">
+
+
+        <!-- DETAILS -->
+
+        <div class="details-content">
+
+
+            <span class="category-tag">
+
+                {{ opportunity["category"] }}
+
+            </span>
+
+
+            <h1>
+
+                {{ opportunity["title"] }}
+
+            </h1>
+
+
+            <p class="details-organization">
+
+                {{ opportunity["organization"] }}
+
+            </p>
+
+
+            <hr>
+
+
+            <h2>
+                Description
+            </h2>
+
+            <p>
+                {{ opportunity["description"] }}
+            </p>
+
+
+            <h2>
+                Eligibility
+            </h2>
+
+            <p>
+                {{ opportunity["eligibility"] }}
+            </p>
+
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="details-sidebar">
+
+
+            <div class="detail">
+
+                <span>
+                    Deadline
+                </span>
+
+                <strong>
+                    {{ opportunity["deadline"] }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>
+                    Mode
+                </span>
+
+                <strong>
+                    {{ opportunity["mode"] }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>
+                    Location
+                </span>
+
+                <strong>
+                    {{ opportunity["location"] }}
+                </strong>
+
+            </div>
+
+
+            <a
+                href="{{ opportunity[
+                    'application_link'
+                ] }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="apply-button"
+            >
+
+                Apply Now →
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+{% else %}
+
+
+<section class="no-results">
+
+    <h2>
+        Opportunity not found
+    </h2>
+
+    <a
+        href="{{ url_for('opportunities') }}"
+        class="primary-button"
+    >
+        View Opportunities
+    </a>
+
+</section>
+
+
+{% endif %}
+
+
+{% endblock %}

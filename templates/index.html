@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Student Opportunity Hub
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="label">
+            STUDENT OPPORTUNITY HUB
+        </span>
+
+
+        <h1>
+            Discover opportunities.
+            <span>
+                Build your future.
+            </span>
+        </h1>
+
+
+        <p>
+
+            Find internships, hackathons,
+            workshops, competitions and
+            scholarships in one place.
+
+        </p>
+
+
+        <a
+            href="{{ url_for('opportunities') }}"
+            class="primary-button"
+        >
+            Explore Opportunities →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <span class="label">
+            EXPLORE
+        </span>
+
+        <h2>
+            Opportunity Categories
+        </h2>
+
+    </div>
+
+
+    <div class="category-grid">
+
+
+        <a
+            href="{{ url_for(
+                'opportunities',
+                category='Internship'
+            ) }}"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                💼
+            </div>
+
+            <h3>
+                Internships
+            </h3>
+
+            <p>
+                Gain practical experience.
+            </p>
+
+        </a>
+
+
+        <a
+            href="{{ url_for(
+                'opportunities',
+                category='Hackathon'
+            ) }}"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                💡
+            </div>
+
+            <h3>
+                Hackathons
+            </h3>
+
+            <p>
+                Build innovative solutions.
+            </p>
+
+        </a>
+
+
+        <a
+            href="{{ url_for(
+                'opportunities',
+                category='Competition'
+            ) }}"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                🏆
+            </div>
+
+            <h3>
+                Competitions
+            </h3>
+
+            <p>
+                Challenge your skills.
+            </p>
+
+        </a>
+
+
+        <a
+            href="{{ url_for(
+                'opportunities',
+                category='Scholarship'
+            ) }}"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                🎓
+            </div>
+
+            <h3>
+                Scholarships
+            </h3>
+
+            <p>
+                Find financial support.
+            </p>
+
+        </a>
+
+
+        <a
+            href="{{ url_for(
+                'opportunities',
+                category='Workshop'
+            ) }}"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                🛠️
+            </div>
+
+            <h3>
+                Workshops
+            </h3>
+
+            <p>
+                Learn new skills.
+            </p>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+<!-- UPCOMING OPPORTUNITIES -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="label">
+                UPCOMING
+            </span>
+
+            <h2>
+                Latest Opportunities
+            </h2>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('opportunities') }}"
+            class="view-all"
+        >
+            View all →
+        </a>
+
+    </div>
+
+
+    <div class="opportunity-grid">
+
+
+        {% for item in opportunities %}
+
+
+        <div class="opportunity-card">
+
+
+            <span class="category-tag">
+
+                {{ item["category"] }}
+
+            </span>
+
+
+            <h3>
+
+                {{ item["title"] }}
+
+            </h3>
+
+
+            <p class="organization">
+
+                {{ item["organization"] }}
+
+            </p>
+
+
+            <p class="description">
+
+                {{ item["description"] }}
+
+            </p>
+
+
+            <div class="card-info">
+
+                <span>
+                    📅 {{ item["deadline"] }}
+                </span>
+
+                <span>
+                    📍 {{ item["mode"] }}
+                </span>
+
+            </div>
+
+
+            <a
+                href="{{ url_for(
+                    'opportunity_details',
+                    id=item['id']
+                ) }}"
+                class="card-button"
+            >
+                View Opportunity
+            </a>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

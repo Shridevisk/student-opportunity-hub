@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        Student Opportunity Hub
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a
+            href="{{ url_for('home') }}"
+            class="logo"
+        >
+            OpportunityHub
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('opportunities') }}">
+                Opportunities
+            </a>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('opportunities') }}"
+            class="nav-button"
+        >
+            Explore
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- CONTENT -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div>
+
+            <h3>
+                OpportunityHub
+            </h3>
+
+            <p>
+                A simple platform for students
+                to discover opportunities.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Explore
+            </h4>
+
+            <a href="{{ url_for('opportunities') }}">
+                Opportunities
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Student Opportunity Hub
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>
